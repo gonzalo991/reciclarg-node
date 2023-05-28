@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const markersController = require('./markersController');
-const userController = require('./userController');
-const zonesController = require('./zonesController');
-const nosotrosController = require('./nosotrosController');
-const authRouter = require('./auth');
+const markersController = require('./controller/markersController');
+const userController = require('./controller/userController');
+const zonesController = require('./controller/zonesController');
+const nosotrosController = require('./controller/nosotrosController');
+const authRouter = require('./routes/auth');
 
 
 const app = express();
@@ -44,7 +44,7 @@ app.delete('/nosotros/:id', nosotrosController.deleteNosotros);
 // Ruta autenticación
 app.use('/auth', authRouter);
 
-
+app.use(require('./routes/models.routes'));
 // Puerto en el que se ejecutará la aplicación
 const port = 3000;
 

@@ -1,4 +1,4 @@
-const connection = require('./db');
+const connection = require('../database/db');
 
 // Obtener todos los marcadores
 async function getMarkers(req, res) {

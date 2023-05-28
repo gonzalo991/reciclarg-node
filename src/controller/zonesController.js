@@ -1,4 +1,4 @@
-const connection = require('./db');
+const connection = require('../database/db');
 
 // Obtener todas las zonas
 function getZones(req, res) {

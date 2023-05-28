@@ -1,4 +1,4 @@
-const connection = require('./db');
+const connection = require('../database/db');
 
 // Obtener todas las personas de la organización
 function getNosotros(req, res) {

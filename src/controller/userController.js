@@ -1,8 +1,8 @@
-const connection = require('./db');
+const connection = require('../database/db');
 
 // Obtener todos los usuarios
 function getUsers(req, res) {
-  connection.query('SELECT * FROM user', (err, results) => {
+  connection.query('SELECT * FROM users', (err, results) => {
     if (err) {
       console.error('Error al obtener los usuarios: ', err);
       res.status(500).send('Error en el servidor');
@@ -16,7 +16,7 @@ function getUsers(req, res) {
 function createUser(req, res) {
   const { nombre, username, password } = req.body;
   const newUser = { nombre, username, password };
-  connection.query('INSERT INTO user SET ?', newUser, (err, result) => {
+  connection.query('INSERT INTO users SET ?', newUser, (err, result) => {
     if (err) {
       console.error('Error al crear el usuario: ', err);
       res.status(500).send('Error en el servidor');
@@ -29,7 +29,7 @@ function createUser(req, res) {
 // Obtener un usuario por su ID
 function getUserById(req, res) {
   const userId = req.params.id;
-  connection.query('SELECT * FROM user WHERE id = ?', userId, (err, results) => {
+  connection.query('SELECT * FROM users WHERE id = ?', userId, (err, results) => {
     if (err) {
       console.error('Error al obtener el usuario: ', err);
       res.status(500).send('Error en el servidor');
@@ -48,7 +48,7 @@ function updateUser(req, res) {
   const userId = req.params.id;
   const { nombre, username } = req.body;
   const updatedUser = { nombre, username };
-  connection.query('UPDATE user SET ? WHERE id = ?', [updatedUser, userId], (err, result) => {
+  connection.query('UPDATE users SET ? WHERE id = ?', [updatedUser, userId], (err, result) => {
     if (err) {
       console.error('Error al actualizar el usuario: ', err);
       res.status(500).send('Error en el servidor');
@@ -61,7 +61,7 @@ function updateUser(req, res) {
 // Eliminar un usuario por su ID
 function deleteUser(req, res) {
   const userId = req.params.id;
-  connection.query('DELETE FROM user WHERE id = ?', userId, (err, result) => {
+  connection.query('DELETE FROM users WHERE id = ?', userId, (err, result) => {
     if (err) {
       console.error('Error al eliminar el usuario: ', err);
       res.status(500).send('Error en el servidor');
@@ -79,7 +79,9 @@ function getUserByUsername(username) {
       return;
     }
 
-    connection.query('SELECT * FROM user WHERE username = ?', [username], (err, results) => {
+
+
+    connection.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
       if (err) {
         reject(err);
         return;
